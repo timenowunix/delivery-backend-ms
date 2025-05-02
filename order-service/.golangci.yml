@@ -15,7 +15,7 @@ issues:
   max-issues-per-linter: 0
   max-same-issues: 0
   exclude:
-    - "should have comment"                       # Не ругается на отсутствие комментариев
+    - "should have comment"                       # Не ругается на отсутствие комментариев/
     - "error return value not checked"            # Не обязывает проверять все ошибки
     - "var .+ should be .*"                       # Не заставляет менять названия переменных
 
