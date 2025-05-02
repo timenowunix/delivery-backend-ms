@@ -2,9 +2,9 @@ name: Go CI (non-blocking)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
 
 jobs:
   lint:
@@ -28,9 +28,10 @@ jobs:
 
     - name: Run golangci-lint
       run: golangci-lint run
+      working-directory: order-service
 
   test:
-    name: Run tests (non-blocking)
+    name: Run unit tests (non-blocking)
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -45,3 +46,4 @@ jobs:
 
     - name: Run tests
       run: go test ./...
+      working-directory: order-service
