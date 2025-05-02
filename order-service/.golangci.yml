@@ -5,8 +5,6 @@ run:
   issues-exit-code: 1
 
 linters:
-  disable:
-    - goanalysis_metalinter
   enable:
     - errcheck
     - govet
