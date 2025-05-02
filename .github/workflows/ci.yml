@@ -13,22 +13,22 @@ jobs:
     continue-on-error: true
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: 1.24.2
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.24.2
 
-    - name: Install golangci-lint
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GITHUB_WORKSPACE/bin v1.55.2
-        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GITHUB_WORKSPACE/bin v1.55.2
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-    - name: Run golangci-lint
-      run: golangci-lint run
-      working-directory: order-service
+      - name: Run golangci-lint
+        run: golangci-lint run
+        working-directory: order-service
 
   test:
     name: Run unit tests (non-blocking)
@@ -36,14 +36,14 @@ jobs:
     continue-on-error: true
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: 1.24.2
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.24.2
 
-    - name: Run tests
-      run: go test ./...
-      working-directory: order-service
+      - name: Run tests
+        run: go test ./...
+        working-directory: order-service

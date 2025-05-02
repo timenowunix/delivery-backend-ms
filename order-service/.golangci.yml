@@ -11,14 +11,14 @@ linters:
     - gocritic
 
 issues:
+  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
-  exclude-use-default: false
   exclude:
-    - "should have comment"
-    - "error return value not checked"
-    - "var .+ should be .*"
+    - "should have comment"                       # Не ругается на отсутствие комментариев
+    - "error return value not checked"            # Не обязывает проверять все ошибки
+    - "var .+ should be .*"                       # Не заставляет менять названия переменных
 
 linters-settings:
   gofmt:
-    simplify: true
+    simplify: true                                # Упрощает выражения (if x == true → if x)
