@@ -1,0 +1,51 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+package order.v1;
+option go_package = "api/order/v1;orderv1";
+
+service OrderService {
+    rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+    rpc GetOrder (GetOrderRequest) returns (GetOrderResponse);
+    rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+    rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
+}
+
+message CreateOrderRequest {
+    int64 parcel_id = 1;
+    string delivery_address = 2;
+    string status = 3;
+}
+
+message CreateOrderResponse {
+    int64 id = 1;
+}
+
+message GetOrderRequest {
+    int64 id = 1;
+}
+
+message GetOrderResponse {
+    int64 id = 1;
+    int64 parcel_id = 2;
+    string delivery_address = 3;
+    string status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message UpdateOrderStatusRequest {
+    int64 id = 1;
+    string status = 2;
+}
+
+message UpdateOrderStatusResponse {
+    int64 id = 1;
+}
+
+message DeleteOrderRequest {
+    int64 id = 1;
+}
+
+message DeleteOrderResponse {
+    int64 id = 1;
+}

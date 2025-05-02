@@ -1,0 +1,28 @@
+# Бинарники сборки
+/bin/
+/build/
+
+# Кэш зависимостей
+/pkg/
+
+# Файлы настроек IDE (например, VS Code, GoLand)
+.idea/
+.vscode/
+
+# Файлы Docker
+docker-compose.override.yml
+
+# Конфигурация окружения
+.env
+.env.*
+
+# Логи
+*.log
+
+# Бэкапы и временные файлы
+*.bak
+*.tmp
+*.swp
+
+# Сборка тестов
+coverage.out

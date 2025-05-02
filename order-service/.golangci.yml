@@ -1,0 +1,24 @@
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - gofmt
+    - unused
+    - staticcheck
+    - gocritic
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-use-default: false
+  exclude:
+    - "should have comment"
+    - "error return value not checked"
+    - "var .+ should be .*"
+
+linters-settings:
+  gofmt:
+    simplify: true
