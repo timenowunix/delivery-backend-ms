@@ -1,0 +1,22 @@
+name: Build and Push Order Service to GHCR
+
+on:
+  push:
+    branches: [main]  # или твоя ветка
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u "${{ secrets.GH_USERNAME }}" --password-stdin
+
+      - name: Build Docker image for order-service
+        run: docker build -t ghcr.io/${{ secrets.GH_USERNAME }}/order-service:latest ./order-service
+
+      - name: Push Docker image
+        run: docker push ghcr.io/${{ secrets.GH_USERNAME }}/order-service:latest
