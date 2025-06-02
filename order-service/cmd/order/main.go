@@ -10,6 +10,7 @@ import (
 
 	"order-service/internal/config"
 	"order-service/internal/db"
+	"order-service/internal/kafka"
 	"order-service/internal/order/handler"
 	"order-service/internal/order/repository"
 	"order-service/internal/order/service"
@@ -32,6 +33,12 @@ func main() {
 
 	cfg := config.NewConfig()
 
+	// Подключаем Kafka producer
+	brokers := []string{os.Getenv("KAFKA_BROKER")}
+	topic := os.Getenv("KAFKA_TOPIC")
+	producer := kafka.NewProducer(brokers, topic)
+	defer producer.Close()
+
 	// Подключение к базе Postgres
 	dbpool, err := db.ConnectPostgres(ctx, cfg)
 	if err != nil {
@@ -52,7 +59,7 @@ func main() {
 	// Инициализация слоёв
 	repo := repository.NewOrderRepository(dbpool)
 	orderService := service.NewOrderService(repo)
-	orderHandler := handler.NewOrderHandler(orderService)
+	orderHandler := handler.NewOrderHandler(orderService, producer)
 
 	// Регистрируем gRPC сервис
 	orderv1.RegisterOrderServiceServer(grpcServer, orderHandler)

@@ -59,7 +59,7 @@ func main() {
 
 	// Запуск в горутине
 	go func() {
-		log.Println("🚚 delivery-service gRPC слушает на :50052")
+		log.Println("delivery-service gRPC слушает на :50052")
 		if err := grpcServer.Serve(lis); err != nil {
 			log.Printf("Ошибка при запуске gRPC: %v", err)
 		}

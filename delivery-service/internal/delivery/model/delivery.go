@@ -32,3 +32,11 @@ type Delivery struct {
 	CreatedAt             time.Time        `json:"created_at"`
 	UpdatedAt             time.Time        `json:"updated_at"`
 }
+
+// OrderCreatedPayload используется в delivery-service для обработки Kafka-события "order-created"
+type OrderCreatedPayload struct {
+	OrderID    int
+	CustomerID int
+	Address    string
+	Priority   string
+}

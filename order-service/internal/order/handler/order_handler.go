@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	orderv1 "order-service/api/order/v1"
+	"order-service/internal/kafka"
 	"order-service/internal/order/model"
 	"order-service/internal/order/service"
 	"time"
@@ -13,11 +14,15 @@ import (
 type OrderHandler struct {
 	orderv1.UnimplementedOrderServiceServer
 	orderService *service.OrderService
+	producer     *kafka.Producer
 }
 
 // Конструктор
-func NewOrderHandler(orderService *service.OrderService) *OrderHandler {
-	return &OrderHandler{orderService: orderService}
+func NewOrderHandler(orderService *service.OrderService, producer *kafka.Producer) *OrderHandler {
+	return &OrderHandler{
+		orderService: orderService,
+		producer:     producer,
+	}
 }
 
 // Реализация методов интерфейса:
